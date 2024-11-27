@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import connectionPg from './db/pg';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
@@ -30,12 +29,5 @@ async function bootstrap() {
     logger.log('Descripción: ' + appDescription);
     logger.log('=====================================================');
   });
-
-  try {
-    const client = await connectionPg.connect();
-    client.release();
-  } catch (error) {
-    console.log(error);
-  }
 }
 bootstrap();
