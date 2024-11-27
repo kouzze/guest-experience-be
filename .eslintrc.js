@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'prettier/prettier': ['warn', { endOfLine: 'auto' }],
-    'max-len': ['error', { code: 110 }]
+    'max-len': ['error', { code: 110 }],
+    'object-curly-spacing': ['', 'always'],
   },
 };

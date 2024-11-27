@@ -11,12 +11,13 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);
+    await this.userRepository.save(user);
     console.log(user);
-    return 'This action adds a new user';
+    return user;
   }
 
   findAll() {
