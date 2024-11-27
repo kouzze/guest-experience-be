@@ -22,6 +22,6 @@ export class Reservation {
   @Column('numeric')
   total: number;
 
-  @Column({ default: 'pendiente' })
+  @Column({ default: 'reservado' })
   status: string;
 }
