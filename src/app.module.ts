@@ -8,6 +8,8 @@ import { PropertyModule } from './property/property.module';
 import { ReservationModule } from './reservation/reservation.module';
 import { ReviewModule } from './review/review.module';
 import { PhotosModule } from './photos/photos.module';
+import { HealthModule } from './health/health.module';
+import { AuthModule } from './auth/auth.module';
 
 const configService = new ConfigService();
 
@@ -34,6 +36,8 @@ const configService = new ConfigService();
     ReservationModule,
     ReviewModule,
     PhotosModule,
+    HealthModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
