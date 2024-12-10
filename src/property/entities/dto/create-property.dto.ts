@@ -1,8 +1,9 @@
-import { IsDateString, IsInt, IsNumber, IsString, IsUrl, MinLength } from 'class-validator';
+import { IsDateString, IsInt, IsNumber, IsOptional, IsString, IsUrl, MinLength } from 'class-validator';
 
 export class CreatePropertyDto {
   @IsInt()
-  userId: number;
+  @IsOptional()
+  userId?: number;
 
   @IsString()
   @MinLength(3)
