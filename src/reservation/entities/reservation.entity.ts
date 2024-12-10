@@ -5,7 +5,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'reservation' })
 export class Reservation {
   @PrimaryGeneratedColumn('increment')
-  id: bigint;
+  id: number;
 
   @ManyToOne(() => Property, (property) => property.reservas)
   property: Property;

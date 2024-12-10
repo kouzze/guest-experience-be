@@ -1,10 +1,11 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Property } from 'src/property/entities/property.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Reservation } from './entities/reservation.entity';
 import { CreateReservationDto } from './dto/create-reservation.dto';
+import { DeleteReservationDto } from './dto/delete-reservation.dto';
 
 @Injectable()
 export class ReservationService {
@@ -44,5 +45,27 @@ export class ReservationService {
     });
 
     return this.reservationRepository.save(reservation);
+  }
+
+  async remove(deleteReservationDto: DeleteReservationDto, userId: number): Promise<void> {
+    // const reservation = await this.reservationRepository.findOneBy({ id: deleteReservationDto.id });
+    const reservation = await this.reservationRepository.findOne({
+      where: { id: deleteReservationDto.id },
+      relations: ['property'],
+    });
+
+    if (!reservation) {
+      throw new NotFoundException('Reservation not found');
+    }
+
+    // if (reservation.user.id !== userId) {
+    //   throw new ForbiddenException('You do not have permission to cancel this reservation');
+    // }
+
+    const property = reservation.property;
+    property.status = 'disponible';
+    await this.propertyRepository.save(property);
+
+    await this.reservationRepository.remove(reservation);
   }
 }

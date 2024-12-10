@@ -1,6 +1,5 @@
-import { ConfigService } from "@nestjs/config";
+import 'dotenv/config';
 
-const configService = new ConfigService;
 export const jwtConstants = {
-    secret: configService.get<string>("JWT_TOKEN"),
-  };
+  secret: process.env.JWT_TOKEN,
+};

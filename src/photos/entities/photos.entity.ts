@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'photos' })
 export class Photos {
   @PrimaryGeneratedColumn('increment')
-  id: bigint;
+  id: number;
 
   @ManyToOne(() => Property, (property) => property.fotos)
   property: Property;

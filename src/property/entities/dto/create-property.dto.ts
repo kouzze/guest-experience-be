@@ -1,4 +1,4 @@
-import { IsDateString, IsInt, IsNumber, IsString, MinLength } from 'class-validator';
+import { IsDateString, IsInt, IsNumber, IsString, IsUrl, MinLength } from 'class-validator';
 
 export class CreatePropertyDto {
   @IsInt()
@@ -25,7 +25,7 @@ export class CreatePropertyDto {
   @IsDateString()
   createdAt: Date;
 
-  // @IsString()
-  // @MinLength(3)
-  // status: string;
+  @IsUrl()
+  photos: string;
+
 }

@@ -46,5 +46,5 @@ export class Property {
   reseñas: Review[];
 
   @OneToMany(() => Photos, (photo) => photo.property)
-  fotos: Photos[];
+  fotos: Photos;
 }
