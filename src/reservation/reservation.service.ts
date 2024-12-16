@@ -48,7 +48,6 @@ export class ReservationService {
   }
 
   async remove(deleteReservationDto: DeleteReservationDto, userId: number): Promise<void> {
-    // const reservation = await this.reservationRepository.findOneBy({ id: deleteReservationDto.id });
     const reservation = await this.reservationRepository.findOne({
       where: { id: deleteReservationDto.id },
       relations: ['property'],
@@ -58,14 +57,14 @@ export class ReservationService {
       throw new NotFoundException('Reservation not found');
     }
 
-    // if (reservation.user.id !== userId) {
-    //   throw new ForbiddenException('You do not have permission to cancel this reservation');
-    // }
-
     const property = reservation.property;
     property.status = 'disponible';
     await this.propertyRepository.save(property);
 
     await this.reservationRepository.remove(reservation);
+  }
+
+  async findAll(): Promise<Reservation[]> {
+    return this.reservationRepository.find({ relations: ['property', 'user'] });
   }
 }
